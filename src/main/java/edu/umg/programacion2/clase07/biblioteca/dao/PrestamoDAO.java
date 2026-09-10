@@ -24,7 +24,7 @@ import edu.umg.programacion2.clase07.biblioteca.modelo.PrestamoDetalle;
  */
 public class PrestamoDAO {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/prog2_db?useSSL=false&serverTimezone=UTC";
+    private static final String URL = "jdbc:mariadb://localhost:3306";
     private static final String USUARIO = "root";
     private static final String PASSWORD = "Progra2";
 
