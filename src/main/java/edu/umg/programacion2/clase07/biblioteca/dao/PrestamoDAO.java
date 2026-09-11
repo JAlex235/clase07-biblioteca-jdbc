@@ -116,10 +116,11 @@ public class PrestamoDAO {
         return resultado;
     }
     
-    private PrestamoDetalle mapearFila(ResultSet resultado) throws SQLException {
-        String tituloLibro = resultado.getString("Titulo");
-        String nombreEstudiante = resultado.getString("Estudiante");
-        String fechaPrestamo = resultado.getString("fecha_prestamo");
-        return new PrestamoDetalle(tituloLibro, nombreEstudiante, fechaPrestamo);
-    }
+private PrestamoDetalle mapearFila(ResultSet resultado) throws SQLException {
+    String tituloLibro = resultado.getString("titulo");
+    String nombreEstudiante = resultado.getString("nombre_estudiante");
+    String fechaPrestamo = resultado.getString("fecha_prestamo");
+
+    return new PrestamoDetalle(tituloLibro, nombreEstudiante, fechaPrestamo);
+}
 }
