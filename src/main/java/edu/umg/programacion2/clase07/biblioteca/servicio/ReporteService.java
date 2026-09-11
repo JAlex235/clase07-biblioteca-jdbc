@@ -1,16 +1,16 @@
 package edu.umg.programacion2.clase07.biblioteca.servicio;
 
-import edu.umg.programacion2.clase07.biblioteca.dao.LibroDAO;
-import edu.umg.programacion2.clase07.biblioteca.dao.PrestamoDAO;
-import edu.umg.programacion2.clase07.biblioteca.modelo.Libro;
-import edu.umg.programacion2.clase07.biblioteca.modelo.PrestamoDetalle;
-
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import edu.umg.programacion2.clase07.biblioteca.dao.LibroDAO;
+import edu.umg.programacion2.clase07.biblioteca.dao.PrestamoDAO;
+import edu.umg.programacion2.clase07.biblioteca.modelo.Libro;
+import edu.umg.programacion2.clase07.biblioteca.modelo.PrestamoDetalle;
 
 /**
  * A diferencia de LibroDAO/PrestamoDAO (que solo hablan con MySQL), este
@@ -55,7 +55,21 @@ public class ReporteService {
      */
     public Set<Libro> librosNuncaPrestados() throws SQLException {
         Set<Libro> resultado = new HashSet<>();
-        // TODO: usar libroDAO y prestamoDAO para llenar "resultado" segun las pistas de arriba.
+
+        List<Libro> libros = libroDAO.listarTodos();
+        List<PrestamoDetalle> activos = prestamoDAO.listarPrestamosActivosConLibro();
+
+        Set<String> titulosPrestados = new HashSet<>();
+
+        for (PrestamoDetalle prestamo : activos) {
+            titulosPrestados.add(prestamo.getTituloLibro());
+        }
+
+        for (Libro libro : libros) {
+            if (!titulosPrestados.contains(libro.getTitulo())) {
+                resultado.add(libro);
+            }
+        }
 
         return resultado;
     }
